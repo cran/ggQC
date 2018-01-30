@@ -41,8 +41,20 @@ d3 <- function(n) {
   sqrt(2*stats::integrate(Ew2, 0, Inf)$value-d2(n)^2)
 }
 #d3(2)
+#this function is needed for d4 calcs over n=100
+min_Ptukey <- function(par, nmeans){
+  abs(.5 - stats::ptukey(q = par, nmeans = nmeans, df = Inf))
+}
 
-d4 <- function(n) {stats::qtukey(p = .5, nmeans = n, df = Inf)}
+d4 <- function(n) {
+  ###There were some n<100 that this could not process
+  ###went to the general function
+  #if (n  < 100) {
+  #  stats::qtukey(p = .5, nmeans = n, df = Inf)
+  #}else{
+      stats::optimise(f = min_Ptukey, interval = c(1,20), nmeans=n)$minimum
+  #  }
+}
 #d4(100)
 
 c4 <- function(n) {sqrt(2/(n-1)) * gamma(n/2)/gamma((n-1)/2)}
@@ -57,20 +69,21 @@ c5 <- function(n) {sqrt(1-c4(n)^2)}
 # the results of simulated data to determine bias correction
 # factors for subgroup medians#
 #
-# filelist <- list.files(path = "../Stat/1e4/", pattern = "csv", full.names = T)
-# #
-# loadfiles <- function(FILE){
-#   temp <- read.csv(file = FILE, header=T)
-#   temp$file <- FILE
-#   return(temp)
-# }
-# b2b4 <- do.call(rbind, lapply(filelist, loadfiles))
-# ratio <- aggregate(sd_median_per_sd_mean_ratio~n, FUN = mean, data=b2b4)
-# colnames(ratio) <- c("n", "ratio")
-# write.csv(ratio, file = "b2b4constants.csv", quote = F, row.names = F)
-# b2b4 <- read.csv("b2b4constants.csv")
-# devtools::use_data(b2b4, internal = TRUE, overwrite = TRUE)
-
+#  filelist <- list.files(path = "../Stat/1e4/", pattern = "csv", full.names = T)
+#  #
+#  loadfiles <- function(FILE){
+#    temp <- read.csv(file = FILE, header=T)
+#    temp$file <- FILE
+#    return(temp)
+#  }
+#
+#  b2b4 <- do.call(rbind, lapply(filelist, loadfiles))
+#  ratio <- aggregate(sd_median_per_sd_mean_ratio~n, FUN = mean, data=b2b4)
+#  colnames(ratio) <- c("n", "ratio")
+#  write.csv(b2b4, file = "b2b4constants.csv", quote = F, row.names = F)
+#  b2b4 <- read.csv("b2b4constants.csv")
+#  devtools::use_data(b2b4, internal = TRUE, overwrite = TRUE)
+#
 b2b4_ratio <- function(n){
   if(n <= 200){
     b2b4_out <- b2b4$ratio[b2b4$n == n]
@@ -119,5 +132,4 @@ QC_constants <- function(n) {
   b4 = d4(n)/b2b4_ratio(n) # used for median(x) RMedian
   ), digits = 6)
 }
-
 

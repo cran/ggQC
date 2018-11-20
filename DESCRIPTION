@@ -1,7 +1,7 @@
 Package: ggQC
 Type: Package
 Title: Quality Control Charts for 'ggplot'
-Version: 0.0.2
+Version: 0.0.3
 Author: Kenith Grey
 Maintainer: Kenith Grey <kenithgrey@r-bar.net>
 Description: Plot single and faceted type quality control charts
@@ -11,10 +11,10 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat, gridExtra, knitr, rmarkdown, reshape2, plyr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Imports: ggplot2, stats, dplyr, tidyr
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-01-30 13:56:58 UTC; billy
+Packaged: 2018-11-20 05:18:43 UTC; billy
 Repository: CRAN
-Date/Publication: 2018-01-30 14:23:59 UTC
+Date/Publication: 2018-11-20 05:50:07 UTC

@@ -67,7 +67,7 @@ xMedian.rMedian
   \item \bold{Dispersion Charts}: rBar, rMedian, sBar.
 }}
 
-\item{color.qc_limits}{color, used to colorize the plot's upper and lower mR control limits.}
+\item{color.qc_limits}{color, used to colorize the plot's upper and lower control limits.}
 
 \item{color.qc_center}{color, used to colorize the plot's center line.}
 
@@ -75,11 +75,11 @@ xMedian.rMedian
 
 \item{color.line}{color, used to colorize lines connecting points in studentized plots. You will need geom_line() for C, P, U, NP, and XmR charts.}
 
-\item{physical.limits}{vector, specify lower phsical boundry and upper physical boundry}
+\item{physical.limits}{vector, specify lower physical boundary and upper physical boundary}
 
 \item{auto.label}{boolean setting, if T labels graph with control limits.}
 
-\item{limit.txt.label}{vector, provides option for nameing or not showing the limit text lables (e.g., UCL, LCL)
+\item{limit.txt.label}{vector, provides option for naming or not showing the limit text labels (e.g., UCL, LCL)
 \itemize{
 \item \bold{limit.txt.label = c("LCL", "UCL")}: default
 \item \bold{limit.txt.label = c("Low", "High")}: changes the label text to low and high
